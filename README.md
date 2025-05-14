@@ -1,17 +1,17 @@
-# ls-rpi5
+# ls-rpi5labwc
 ## Shell scripts and setup for using Raspberry Pi 5 as LoopSign player
 
-The starting point of the setup is a Raspberry Pi 5 running on Raspberry Pi OS Debian 12 (Bookworm) with desktop, using its default Wayfire Wayland compositor. Release date: July 4 2024. Download [here](https://downloads.raspberrypi.com/raspios_arm64/images/raspios_arm64-2024-07-04/2024-07-04-raspios-bookworm-arm64.img.xz).
+The starting point of the setup is a Raspberry Pi 5 running on Raspberry Pi OS Debian 12 (Bookworm) with desktop, using Labwc Wayland compositor. Release date: May 13 2025. Download [here](https://downloads.raspberrypi.com/raspios_arm64/images/raspios_arm64-2025-05-13/2025-05-13-raspios-bookworm-arm64.img.xz).
 
 ![LoopSign logo](LoopSign-logo.png)
 
 ## Concept
 The purpose of the setup is to make the Raspberry Pi work as an unattended LoopSign player. Its main job is to launch the user's LoopSign screen, a static URL, in a fullscreen Chromium window. A set of bash scripts are part of this setup to make the Pi behave as intended and stably over time:
-- `autorun.sh` will run at boot, as defined in `~/.config/wayfire.ini`. The script performs the following tasks in order:
+- `autorun.sh` will run at boot, as defined in `~/.config/labwc/autostart`. The script performs the following tasks in order:
   - Runs `setresolution.sh` to set the screen resolution to 1920x1080@60Hz if any other resolution is set.
   - Restarts udevmon to force-hide the cursor (utilizing separate repository [hideaway.git](https://github.com/Loop24-AS/hideaway)).
   - Waits for the system to get a working internet connection by checking if the player's date and time have synced with NTP.
-  - If after the NTP sync, the script notices that it's been more than 30 days since the last NTP sync, it runs `systemupdatedialog.sh`, which will do a full system update and reoot.
+  - ~~If after the NTP sync, the script notices that it's been more than 30 days since the last NTP sync, it runs `systemupdatedialog.sh`, which will do a full system update and reoot.~~
   - Pulls this repository for changes and implements any updates. If there are updates to `autorun.sh`, the script restarts using the new version of itself.
   - Re-checks the screen resolution in case there are updates to `setresolution.sh` after the `git pull`.
   - Starts `autorefresh.sh` which will periodically (originally every three hours) do a cache refresh of Chromium if it's running.
@@ -25,34 +25,7 @@ The purpose of the setup is to make the Raspberry Pi work as an unattended LoopS
 The Raspberry Pi OS image is burnt on a high speed 16 GB MicroSD card. Username: loopsign || Password: loop24
 
 ### Clone the hideaway repository
-Make SSH key pair.
-```
-ssh-keygen -t rsa -b 4096 -C "Raspberry Pi 5 LoopSign Player"
-```
-Add the private key to the SSH Agent.
-```
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa2
-```
-Deploy the public key to the Github repository.
-Copy the key `cat ~/.ssh/id_rsa2.pub` and paste it in the Github repository settings (Settings --> Deploy keys ---> Add deploy key). Set it to read-only access.
-
-Automatically accept the SSH host key for github.com
-```
-nano ~/.ssh/config
-```
-```
-Host github.com
-    StrictHostKeyChecking no
-    UserKnownHostsFile=/dev/null
-```
-Ctrl + O to save and ctrl + X to exit Nano.
-
-Clone the repository.
-```
-cd ~
-git clone git@github.com:Loop24-AS/hideaway.git
-```
+XXXXXXX
 
 ### Clone the ls-rpi5 repository
 Make SSH key pair.
@@ -79,15 +52,15 @@ chmod +x ~/autorun.sh
 ```
 
 ### Set autorun.sh to run at boot
-Add autostart instructions to `wayfire.ini`
+Create `~/.config/labwc/autostart` and add command to run ~/autorun.sh at boot.
 ```
-nano ~/.config/wayfire.ini
+nano ~/.config/labwc/autostart
 ```
-Add the following to the bottom of the document.
+Add the following line.
 ```
 
-[autostart]
-loopsign = /home/loopsign/autorun.sh
+
+/home/loopsign/autorun.sh &
 ```
 
 ### Set headless resolution
