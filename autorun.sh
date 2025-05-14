@@ -34,10 +34,10 @@ check_internet_and_time_sync() {
 
 # Function to update the repository using git reset --hard and git pull with rebase
 update_repository() {
-    local REPO_DIR="/home/loopsign/ls-rpi5"
+    local REPO_DIR="/home/loopsign/ls-rpi5labwc"
     local CONFIG_FILE="/home/loopsign/config"
     local BRANCH="prod"  # Default to "prod" for production
-    local GITHUB_REPO_URL="https://github.com/Loop24-AS/ls-rpi5.git"
+    local GITHUB_REPO_URL="https://github.com/Loop24-AS/ls-rpi5labwc.git"
 
     # Check if the configuration file exists
     if [ -f "$CONFIG_FILE" ]; then
@@ -82,7 +82,7 @@ update_repository() {
 
 # Function to schedule the master script update and restart
 schedule_master_script_update_and_restart() {
-    NEW_SCRIPT_PATH="/home/loopsign/ls-rpi5/autorun.sh"
+    NEW_SCRIPT_PATH="/home/loopsign/ls-rpi5labwc/autorun.sh"
     CURRENT_SCRIPT_PATH="/home/loopsign/autorun.sh"
 
     if [ -f "$NEW_SCRIPT_PATH" ]; then
