@@ -10,10 +10,6 @@ log() {
 
 log "Script started."
 
-# Wait 15 seconds
-log "Waiting 15 seconds"
-sleep 15
-
 # Wait until HDMI-A-1 or HDMI-A-2 shows up in wlr-randr output
 log "Waiting for HDMI-A-1 or HDMI-A-2 to be connected..."
 
@@ -21,6 +17,8 @@ while ! wlr-randr | grep -q '^HDMI-A-[12]'; do
     log "No HDMI-A-1 or HDMI-A-2 detected yet. Retrying in 10 seconds..."
     sleep 10
 done
+
+log "Display detected on HDMI-A-1 or HDMI-A-2. Checking if Chromium is running"
 
 # Function to check if Chromium is running
 check_chromium() {
@@ -38,10 +36,10 @@ refresh_chromium() {
 
 while true; do
     if check_chromium; then
-        echo "Chromium is running. Refreshing..."
+        log "Chromium is running. Refreshing..."
         refresh_chromium
     else
-        echo "Chromium is not running."
+        log "Chromium is not running."
     fi
     # Wait for 3 hours before repeating
     sleep 10800
