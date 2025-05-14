@@ -61,8 +61,8 @@ sudo apt remove geany -y && sudo apt autoremove -y
 ```
 ### Configure and set LoopSign Plymouth theme to enable LoopSign splash at boot
 ```
-chmod +x ~/ls-rpi5/loopsignsplash.sh
-~/ls-rpi5/loopsignsplash.sh
+chmod +x ~/ls-rpi5labwc/loopsignsplash.sh
+~/ls-rpi5labwc/loopsignsplash.sh
 ```
 
 ## Changes set in the GUI
