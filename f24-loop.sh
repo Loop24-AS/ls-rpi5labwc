@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOG_FILE="/home/loopsign/hideaway-trigger.log"
+LOG_FILE="/home/loopsign/hideaway-trigger2.log"
 
 log() {
     local TIMESTAMP
@@ -18,8 +18,9 @@ while ! wlr-randr | grep -q '^HDMI-A-[12]'; do
     sleep 10
 done
 
-log "Display detected on HDMI-A-1 or HDMI-A-2. Sending Ctrl+R with wtype to hide cursor..."
-sleep 10
-wtype -M ctrl -k R -m ctrl
+log "Display detected on HDMI-A-1 or HDMI-A-2. Restarting udevmon to trigger HideAway."
+# sleep 10
+# wtype -M ctrl -k R -m ctrl
+sudo systemctl restart udevmon
 
 log "Ctrl+R simulated. Script finished."
