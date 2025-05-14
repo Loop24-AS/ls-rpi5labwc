@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Define the source file
-SOURCE_FILE="/home/loopsign/ls-rpi5/sudo-crontab.txt"
+# Define paths
+SOURCE_FILE="/home/loopsign/ls-rpi5labwc/sudo-crontab.txt"
+CURRENT_FILE="/home/loopsign/current-sudo-crontab.txt"
 
 # Check if the source file exists
 if [[ ! -f "$SOURCE_FILE" ]]; then
@@ -9,13 +10,24 @@ if [[ ! -f "$SOURCE_FILE" ]]; then
     exit 1
 fi
 
-# Backup the existing sudo crontab
-BACKUP_FILE="/tmp/sudo-crontab-backup-$(date +%F_%T).txt"
-sudo crontab -l > "$BACKUP_FILE" 2>/dev/null
+# Check if the current reference file exists
+if [[ ! -f "$CURRENT_FILE" ]]; then
+    echo "Current crontab reference not found, assuming first-time setup."
+    sudo crontab < "$SOURCE_FILE"
+    cp "$SOURCE_FILE" "$CURRENT_FILE"
+    echo "Installed and stored new sudo crontab."
+    exit 0
+fi
 
-echo "Backup of existing sudo crontab saved to: $BACKUP_FILE"
+# Compare the new file with the current reference
+if cmp -s "$SOURCE_FILE" "$CURRENT_FILE"; then
+    echo "No changes in sudo crontab. Nothing to update."
+else
+    BACKUP_FILE="/tmp/sudo-crontab-backup-$(date +%F_%T).txt"
+    cp "$CURRENT_FILE" "$BACKUP_FILE"
+    echo "Backup of previous sudo crontab saved to: $BACKUP_FILE"
 
-# Overwrite the current sudo crontab with the new one
-sudo crontab < "$SOURCE_FILE"
-
-echo "Successfully replaced sudo crontab with $SOURCE_FILE."
+    sudo crontab < "$SOURCE_FILE"
+    cp "$SOURCE_FILE" "$CURRENT_FILE"
+    echo "Updated sudo crontab and saved new reference."
+fi
