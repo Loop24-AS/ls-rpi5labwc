@@ -1,5 +1,15 @@
 #!/bin/bash
 
+sleep 15
+
+# Wait until HDMI-A-1 or HDMI-A-2 shows up in wlr-randr output
+log "Waiting for HDMI-A-1 or HDMI-A-2 to be connected..."
+
+while ! wlr-randr | grep -q '^HDMI-A-[12]'; do
+    log "No HDMI-A-1 or HDMI-A-2 detected yet. Retrying in 10 seconds..."
+    sleep 10
+done
+
 # Function to check if Chromium is running
 check_chromium() {
     pgrep chromium > /dev/null
