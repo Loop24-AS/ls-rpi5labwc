@@ -141,16 +141,15 @@ schedule_master_script_update_and_restart
 pkill zenity
 
 ## Set cron jobs
-chmod +x /home/loopsign/ls-rpi5/define-sudo-crontab.sh
-sudo /home/loopsign/ls-rpi5/define-sudo-crontab.sh
+chmod +x /home/loopsign/ls-rpi5labwc/define-sudo-crontab.sh
+sudo /home/loopsign/ls-rpi5labwc/define-sudo-crontab.sh
 
 # Show countdown while secondary scripts run
 start_countdown
 
 # Run the updated scripts
-cd /home/loopsign/ls-rpi5
+cd /home/loopsign/ls-rpi5labwc
 chmod +x autorefresh.sh hashgenerator.sh loopsign.sh hidecursor.sh loopsignsplash.sh pishrink.sh # Adjust filenames as needed
-./setresolution.sh
 nohup ./autorefresh.sh &
 ./hashgenerator.sh
 ./loopsign.sh &
