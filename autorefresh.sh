@@ -2,6 +2,14 @@
 
 LOG_FILE="/home/loopsign/hideaway-trigger.log"
 
+log() {
+    local TIMESTAMP
+    TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+    echo "$TIMESTAMP $1" | tee -a "$LOG_FILE"
+}
+
+log "Script started."
+
 # Wait 15 seconds
 log "Waiting 15 seconds"
 sleep 15
