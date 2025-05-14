@@ -63,12 +63,12 @@ Add the following line.
 
 ### Install neccessary packages
 ```
-sudo apt install upower fonts-noto-color-emoji ntp wtype -y
+sudo apt install fonts-noto-color-emoji wtype -y
 ```
 
 ### Uninstall uneccessary packages
 ```
-sudo apt remove geany firefox -y && sudo apt autoremove -y
+sudo apt remove geany -y && sudo apt autoremove -y
 ```
 ### Configure and set LoopSign Plymouth theme to enable LoopSign splash at boot
 ```
