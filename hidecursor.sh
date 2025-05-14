@@ -4,7 +4,7 @@
 sudo apt install -y interception-tools interception-tools-compat
 sudo apt install -y cmake
 cd ~
-git clone git@github.com:Loop24-AS/hideaway.git
+git clone https://github.com/Loop24-AS/hideaway.git
 sudo cp /home/$USER/hideaway/config.yaml /etc/interception/udevmon.d/config.yaml
 cd hideaway
 cmake -B build -DCMAKE_BUILD_TYPE=Release
