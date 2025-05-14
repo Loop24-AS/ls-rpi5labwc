@@ -61,16 +61,6 @@ Add the following line.
 /home/loopsign/autorun.sh &
 ```
 
-### Set headless resolution
-Edit /boot/firmware/cmdline.txt and add one space and the headless resolution specification at the end.
-```
-sudo nano /boot/firmware/cmdline.txt
-```
-```
- video=HDMI-A-1:1920x1080@60D
-```
-Ctrl + O to save and Ctrl + X to exit Nano.
-
 ### Install neccessary packages
 ```
 sudo apt install upower fonts-noto-color-emoji ntp wtype -y
@@ -100,8 +90,10 @@ Double-click ***Raspberry Pi Configuration*** on the desktop. In the ***Display*
 
 Right-click the taskbar and choose ***Notifications***. Disable ***Show notifications***.
 
+Remove the ***Updater*** icon from the taskbar.
+
 ### Chromium settings
-Open Chromium and open URL `chrome://settings/cookies`. Enable ***Allow third-party cookies***. Open URL `chrome://settings/content/sound`. Add `https://play.loopsign.eu` and `https://edit.loopsign.eu` under ***Allowed to play sound***. Open `chrome://settings/languages`. Disable ***Spell check*** and ***Google Transate***. Open `chrome://settings/defaultBrowser` and click ***Make default***.
+Open Chromium and open URL `chrome://settings/cookies`. Enable ***Allow third-party cookies***. Open URL `chrome://settings/content/sound`. Add `https://play.loopsign.eu` and `https://edit.loopsign.eu` under ***Allowed to play sound***. Open `chrome://settings/languages`. Disable ***Spell check*** and ***Google Translate***. Open `chrome://settings/defaultBrowser` and click ***Make default***.
 
 ### Desktop
 Right-click the desktop and open ***Desktop preferences***. Set `/home/loopsign/ls-rpi5/Linux background.png` as desktop background picture. Disable ***Wastebasket***. Open the ***Taskbar*** pane and set ***Size: Medium (24x24)***, ***Position: Bottom***, ***Colour: Black*** and ***Text Colour: White***.
