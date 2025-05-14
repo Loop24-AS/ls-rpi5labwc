@@ -5,7 +5,7 @@ THEME_NAME="loopsign"
 THEME_DIR="/usr/share/plymouth/themes/$THEME_NAME"
 SCRIPT_FILE="$THEME_DIR/$THEME_NAME.script"
 PLYMOUTH_FILE="$THEME_DIR/$THEME_NAME.plymouth"
-SPLASH_IMAGE="/home/loopsign/ls-rpi5/splash.png"
+SPLASH_IMAGE="/home/loopsign/ls-rpi5labwc/splash.png"
 
 # Create the theme directory
 sudo mkdir -p "$THEME_DIR"
