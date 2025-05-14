@@ -24,31 +24,23 @@ The purpose of the setup is to make the Raspberry Pi work as an unattended LoopS
 
 The Raspberry Pi OS image is burnt on a high speed 16 GB MicroSD card. Username: loopsign || Password: loop24
 
-### Clone the hideaway repository
-XXXXXXX
-
 ### Clone the ls-rpi5 repository
-Make SSH key pair.
-```
-ssh-keygen -t rsa -b 4096 -C "Raspberry Pi 5 LoopSign Player"
-```
-Add the private key to the SSH Agent.
-```
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa
-```
-Deploy the public key to the Github repository.
-Copy the key `cat ~/.ssh/id_rsa.pub` and paste it in the Github repository settings (Settings --> Deploy keys ---> Add deploy key). Set it to read-only access.
 
-Clone the repository.
 ```
 cd ~
-git clone git@github.com:Loop24-AS/ls-rpi5.git
+git clone https://github.com/Loop24-AS/ls-rpi5labwc.git
 ```
-Copy `autorun.sh` to `/home/loopsign` and make it executable.
+Copy `autorun.sh` to `/home/loopsign/` and make it executable.
 ```
-cp ~/ls-rpi5/autorun.sh ~/autorun.sh
-chmod +x ~/autorun.sh
+cp /home/loopsign/ls-rpi5labwc/autorun.sh /home/loopsign/autorun.sh
+chmod +x /home/loopsign/autorun.sh
+```
+
+### Clone the hideaway repository
+Make `hidecursor.sh`executable and run it.
+```
+chmod +x /home/loopsign/ls-rpi5labwc/hidecursor.sh
+/home/loopsign/ls-rpi5labwc/hidecursor.sh
 ```
 
 ### Set autorun.sh to run at boot
