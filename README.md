@@ -36,7 +36,7 @@ cp /home/loopsign/ls-rpi5labwc/autorun.sh /home/loopsign/autorun.sh
 chmod +x /home/loopsign/autorun.sh
 ```
 
-### Clone the hideaway repository
+### Clone the hideaway repository and activate the plugin to hide the cursor
 Make `hidecursor.sh`executable and run it.
 ```
 chmod +x /home/loopsign/ls-rpi5labwc/hidecursor.sh
@@ -66,12 +66,6 @@ sudo apt remove geany -y && sudo apt autoremove -y
 ```
 chmod +x ~/ls-rpi5/loopsignsplash.sh
 ~/ls-rpi5/loopsignsplash.sh
-```
-
-### Install and activate tweak to hide cursor
-```
-chmod +x ~/ls-rpi5/hidecursor.sh
-~/ls-rpi5/hidecursor.sh
 ```
 
 ## Changes set in the GUI
