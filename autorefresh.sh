@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Wait for Chromium to launch
-sleep 15
-
 # Function to check if Chromium is running
 check_chromium() {
     pgrep chromium > /dev/null
