@@ -13,7 +13,7 @@ The purpose of the setup is to make the Raspberry Pi work as an unattended LoopS
   - Waits for the system to get a working internet connection by checking if the player's date and time have synced with NTP.
   - ~~If after the NTP sync, the script notices that it's been more than 30 days since the last NTP sync, it runs `systemupdatedialog.sh`, which will do a full system update and reoot.~~
   - Pulls this repository for changes and implements any updates. If there are updates to `autorun.sh`, the script restarts using the new version of itself.
-  - Re-checks the screen resolution in case there are updates to `setresolution.sh` after the `git pull`.
+  - ~~Re-checks the screen resolution in case there are updates to `setresolution.sh` after the `git pull`.~~
   - Starts `autorefresh.sh` which will periodically (originally every three hours) do a cache refresh of Chromium if it's running.
   - Runs `generatehash.sh` to generate a unique seven-character code. The code is based on the Pi's ethernet MAC address, and it will always stay static for every specific Raspberry Pi if the script is re-run.
   - Runs `loopsign.sh` to launch Chromium in fullscreen with the LoopSign URL. The hash code from the previous step is a unique part of the URL, making it easy for the user to pair the player to their corresponding LoopSign screen without needing to connect to the player and control its settings.
