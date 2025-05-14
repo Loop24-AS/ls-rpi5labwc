@@ -8,7 +8,9 @@ log() {
     echo "$TIMESTAMP $1" | tee -a "$LOG_FILE"
 }
 
-log "Script started."
+log "Script started. Sleeping 15 seconds."
+
+sleep 15
 
 # Wait until HDMI-A-1 or HDMI-A-2 shows up in wlr-randr output
 log "Waiting for HDMI-A-1 or HDMI-A-2 to be connected..."
