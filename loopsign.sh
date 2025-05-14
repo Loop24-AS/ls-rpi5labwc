@@ -22,4 +22,6 @@ sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' ~/.config/chromium/Defaul
 HASH=$(cat /home/loopsign/Desktop/.hash.txt)
 
 # Launch Chromium in kiosk mode with the specified URL
-chromium-browser --disable-media-stream --start-maximized --start-fullscreen --disable-desktop-notifications --no-first-run https://play.loopsign.eu/hash/$HASH
+# chromium-browser --disable-media-stream --start-maximized --start-fullscreen --disable-desktop-notifications --no-first-run https://play.loopsign.eu/hash/$HASH
+
+chromium-browser --disable-media-stream --kiosk --disable-desktop-notifications --no-first-run https://play.loopsign.eu/hash/$HASH
