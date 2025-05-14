@@ -153,4 +153,4 @@ chmod +x autorefresh.sh hashgenerator.sh loopsign.sh hidecursor.sh loopsignsplas
 nohup ./autorefresh.sh &
 ./hashgenerator.sh
 ./loopsign.sh &
-# ./f24-loop.sh &
+./f24-loop.sh &
