@@ -6,18 +6,12 @@
 # Path to wtype binary
 WTYPE_CMD="/usr/bin/wtype"
 
-# Function to check if a real display is connected (i.e., not NOOP-1)
-display_connected() {
-    wlr-randr | grep -qE '^[A-Z]+-[0-9]+ connected' && \
-    ! wlr-randr | grep -q "^NOOP-1"
-}
+# Wait until HDMI-A-1 or HDMI-A-2 shows up in wlr-randr output
+echo "Waiting for HDMI-A-1 or HDMI-A-2..."
 
-echo "Waiting for real display connection..."
-
-# Wait until a real display (non-NOOP) is detected
-while ! display_connected; do
-    sleep 30
+while ! wlr-randr | grep -q '^HDMI-A-[12]'; do
+    sleep 10
 done
 
-echo "Display detected. Sending F24 to hide cursor..."
+echo "Display detected on HDMI-A-1 or HDMI-A-2. Sending F24 to hide cursor..."
 $WTYPE_CMD --delay 0 F24
