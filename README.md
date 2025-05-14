@@ -58,8 +58,6 @@ nano ~/.config/labwc/autostart
 ```
 Add the following line.
 ```
-
-
 /home/loopsign/autorun.sh &
 ```
 
