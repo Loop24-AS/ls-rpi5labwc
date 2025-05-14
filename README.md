@@ -8,7 +8,7 @@ The starting point of the setup is a Raspberry Pi 5 running on Raspberry Pi OS D
 ## Concept
 The purpose of the setup is to make the Raspberry Pi work as an unattended LoopSign player. Its main job is to launch the user's LoopSign screen, a static URL, in a fullscreen Chromium window. A set of bash scripts are part of this setup to make the Pi behave as intended and stably over time:
 - `autorun.sh` will run at boot, as defined in `~/.config/labwc/autostart`. The script performs the following tasks in order:
-  - Runs `setresolution.sh` to set the screen resolution to 1920x1080@60Hz if any other resolution is set.
+  - ~~Runs `setresolution.sh` to set the screen resolution to 1920x1080@60Hz if any other resolution is set.~~
   - Restarts udevmon to force-hide the cursor (utilizing separate repository [hideaway.git](https://github.com/Loop24-AS/hideaway)).
   - Waits for the system to get a working internet connection by checking if the player's date and time have synced with NTP.
   - ~~If after the NTP sync, the script notices that it's been more than 30 days since the last NTP sync, it runs `systemupdatedialog.sh`, which will do a full system update and reoot.~~
