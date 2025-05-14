@@ -1,5 +1,9 @@
 #!/bin/bash
 
+LOG_FILE="/home/loopsign/hideaway-trigger.log"
+
+# Wait 15 seconds
+log "Waiting 15 seconds"
 sleep 15
 
 # Wait until HDMI-A-1 or HDMI-A-2 shows up in wlr-randr output
