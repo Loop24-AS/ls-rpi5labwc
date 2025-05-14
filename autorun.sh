@@ -3,10 +3,6 @@
 exec > /tmp/autorun.log 2>&1
 echo "Script started at $(date)"
 
-# Set resolution to 1920x1080@60Hz
-chmod +x /home/loopsign/ls-rpi5/setresolution.sh
-/home/loopsign/ls-rpi5/setresolution.sh
-
 # Restart udevmon to hide cursor
 sudo systemctl restart udevmon
 
@@ -19,13 +15,13 @@ check_internet_and_time_sync() {
 
     # Wait until the time has been synced
     while true; do
-        # Check if the system time has been synchronized
-        if ntpq -p | grep "*"; then
+        # Check if system time is synchronized using systemd-timesyncd
+        if timedatectl show -p NTPSynchronized --value | grep -q "yes"; then
             synced=true
             echo "System time has been synchronized."
             break
         fi
-        
+
         # Display a message to the user if the time has not yet been synced and the dialog has not yet been displayed
         if ! $synced && ! $displayed; then
             echo "Displaying initial zenity message about time sync."
@@ -132,24 +128,10 @@ start_countdown() {
                --no-cancel &
 }
 
-# Check to see if system update log file exists, and if it doesn't run the update script
-check_update_history() {
-    file="/var/log/player_update.log"
-    script="/home/loopsign/ls-rpi5/systemupdatedialog.sh"
-
-    if [ ! -f "$file" ]; then
-        echo "File $file does not exist. Executing update script."
-        chmod +x "$script"
-        sudo "$script"
-    else
-        echo "File $file exists. No action needed."
-    fi
-}
-
 # Check internet connection and time synchronization and run updates if neccessary
 check_internet_and_time_sync
 
-# Pull the latest changes from the repository with rebase
+# Pull the latest changes from the repository
 update_repository
 
 # Schedule the master script update and restart if needed
@@ -159,13 +141,8 @@ schedule_master_script_update_and_restart
 pkill zenity
 
 ## Set cron jobs
-chmod +x /home/loopsign/ls-rpi5/hotplug-restart-lightdm.sh
 chmod +x /home/loopsign/ls-rpi5/define-sudo-crontab.sh
 sudo /home/loopsign/ls-rpi5/define-sudo-crontab.sh
-
-## Check screen connection
-#chmod +x /home/loopsign/ls-rpi5/hotplug-connection-monitor.sh
-#/home/loopsign/ls-rpi5/hotplug-connection-monitor.sh
 
 # Show countdown while secondary scripts run
 start_countdown
@@ -177,7 +154,3 @@ chmod +x setresolution.sh autorefresh.sh hashgenerator.sh loopsign.sh reboot.sh 
 nohup ./autorefresh.sh &
 ./hashgenerator.sh
 ./loopsign.sh &
-sleep 15
-# check_update_history
-# sudo ./updateandreboot.sh
-# sudo ./reboot.sh
