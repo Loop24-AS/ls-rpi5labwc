@@ -149,8 +149,8 @@ start_countdown
 
 # Run the updated scripts
 cd /home/loopsign/ls-rpi5labwc
-chmod +x autorefresh.sh hashgenerator.sh loopsign.sh hidecursor.sh loopsignsplash.sh pishrink.sh f24-loop.sh # Adjust filenames as needed
+chmod +x autorefresh.sh hashgenerator.sh loopsign.sh hidecursor.sh loopsignsplash.sh pishrink.sh hideaway-trigger.sh # Adjust filenames as needed
 nohup ./autorefresh.sh &
 ./hashgenerator.sh
 ./loopsign.sh &
-./f24-loop.sh &
+./hideaway-trigger.sh &
