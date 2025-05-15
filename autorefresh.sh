@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOG_FILE="/home/loopsign/hideaway-trigger.log"
+LOG_FILE="/home/loopsign/autrefresh-log.log"
 
 log() {
     local TIMESTAMP
@@ -8,19 +8,7 @@ log() {
     echo "$TIMESTAMP $1" | tee -a "$LOG_FILE"
 }
 
-log "Script started. Sleeping 15 seconds."
-
-sleep 15
-
-# Wait until HDMI-A-1 or HDMI-A-2 shows up in wlr-randr output
-log "Waiting for HDMI-A-1 or HDMI-A-2 to be connected..."
-
-while ! wlr-randr | grep -q '^HDMI-A-[12]'; do
-    log "No HDMI-A-1 or HDMI-A-2 detected yet. Retrying in 10 seconds..."
-    sleep 10
-done
-
-log "Display detected on HDMI-A-1 or HDMI-A-2. Checking if Chromium is running"
+log "Script started."
 
 # Function to check if Chromium is running
 check_chromium() {
@@ -43,6 +31,6 @@ while true; do
     else
         log "Chromium is not running."
     fi
-    # Wait for 3 hours before repeating
+    log "Waiting 3 hours before repeating"
     sleep 10800
 done
