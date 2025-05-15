@@ -91,11 +91,11 @@ Close terminal.
 ### Export image and shrink it
 Insert USB memory stick and export image.
 ```
-sudo dd if=/dev/mmcblk0 of=/media/loopsign/[name-of-memory-stick]/ls_image_2025_2_pi5.img bs=1M status=progress
+sudo dd if=/dev/mmcblk0 of=/media/loopsign/[name-of-memory-stick]/ls_image_2025_5_pi5.img bs=1M status=progress
 ```
 Run pishrink.sh on the exported image to shrink and compress it.
 ```
-sudo /home/loopsign/ls-rpi5/pishrink.sh -z /media/loopsign/[name-of-memory-stick]/ls_image_2025_2_pi5.img
+sudo /home/loopsign/ls-rpi5labwc/pishrink.sh -z /media/loopsign/[name-of-memory-stick]/ls_image_2025_5_pi5.img
 ```
 Eject the memory stick.
 
