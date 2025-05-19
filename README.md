@@ -81,6 +81,40 @@ Open Chromium and open URL `chrome://settings/cookies`. Enable ***Allow third-pa
 ### Desktop
 Right-click the desktop and open ***Desktop preferences***. Set `/home/loopsign/ls-rpi5/Linux background.png` as desktop background picture. Disable ***Wastebasket***. Open the ***Taskbar*** pane and set ***Size: Medium (24x24)***, ***Position: Bottom***, ***Colour: Black*** and ***Text Colour: White***.
 
+---
+
+### Set up automatic root partition expansion after first boot
+### Create the autoexpand shell script
+```
+sudo nano /root/autoexpand.sh
+```
+
+```
+#!/bin/bash
+set -e
+
+# Expand root partition using official raspi-config logic
+raspi-config --expand-rootfs
+
+# Disable this service for future boots and remove itself
+systemctl disable autoexpand.service
+rm -f /etc/systemd/system/autoexpand.service
+systemctl daemon-reload
+rm -f "$0"
+
+# Reboot to complete expansion (raspi-config handles actual resize2fs on next boot)
+reboot
+```
+
+```
+sudo chmod +x /root/autoexpand.sh
+```
+
+### 
+
+
+
+
 ### Clear command history from terminal
 ```
 history -c
