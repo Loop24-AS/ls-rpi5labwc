@@ -83,8 +83,9 @@ Right-click the desktop and open ***Desktop preferences***. Set `/home/loopsign/
 
 ---
 
-### Set up automatic root partition expansion after first boot
+## Set up automatic root partition expansion after first boot
 ### Create the autoexpand shell script
+
 ```
 sudo nano /root/autoexpand.sh
 ```
