@@ -91,6 +91,7 @@ Create and edit /root/autoexpand.sh:
 sudo nano /root/autoexpand.sh
 ```
 
+Paste the following, then save and exit:
 ```
 #!/bin/bash
 set -e
@@ -108,6 +109,7 @@ rm -f "$0"
 reboot
 ```
 
+Make the script executable:
 ```
 sudo chmod +x /root/autoexpand.sh
 ```
