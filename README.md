@@ -86,6 +86,7 @@ Right-click the desktop and open ***Desktop preferences***. Set `/home/loopsign/
 ## Set up automatic root partition expansion after first boot
 ### Create the autoexpand shell script
 
+Create and edit /root/autoexpand.sh:
 ```
 sudo nano /root/autoexpand.sh
 ```
@@ -111,7 +112,7 @@ reboot
 sudo chmod +x /root/autoexpand.sh
 ```
 
-### 
+### Create the systemd service file
 
 
 
