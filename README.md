@@ -95,7 +95,7 @@ sudo dd if=/dev/mmcblk0 of=/media/loopsign/[name-of-memory-stick]/ls_image_2025_
 ```
 Run pishrink.sh on the exported image to shrink and compress it.
 ```
-sudo /home/loopsign/ls-rpi5labwc/pishrink.sh -z /media/loopsign/[name-of-memory-stick]/ls_image_2025_5_pi5.img
+sudo /home/loopsign/ls-rpi5labwc/pishrink.sh -s -z /media/loopsign/[name-of-memory-stick]/ls_image_2025_5_pi5.img
 ```
 Eject the memory stick.
 
