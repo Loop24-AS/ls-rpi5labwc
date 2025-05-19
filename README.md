@@ -116,7 +116,37 @@ sudo chmod +x /root/autoexpand.sh
 
 ### Create the systemd service file
 
+Create and edit /etc/systemd/system/autoexpand.service:
+```
+sudo nano /etc/systemd/system/autoexpand.service
+```
 
+Paste the following, then save and exit:
+```
+[Unit]
+Description=Auto-expand root partition on first boot (via raspi-config)
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/root/autoexpand.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### Enable the systemd service
+
+```
+sudo systemctl enable autoexpand.service
+```
+
+### Clear machine-id to ensure first-boot script/services run
+
+```
+sudo rm -f /etc/machine-id
+sudo touch /etc/machine-id
+```
 
 
 ### Clear command history from terminal
