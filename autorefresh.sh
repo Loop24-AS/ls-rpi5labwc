@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOG_FILE="/home/loopsign/autrefresh-log.log"
+LOG_FILE="/home/loopsign/autorefresh.log"
 
 log() {
     local TIMESTAMP
