@@ -20,7 +20,8 @@ done
 
 log "Display detected on HDMI-A-1 or HDMI-A-2. Restarting udevmon to trigger HideAway after 30 seconds."
 
-sleep 30
+sleep 60
+
 sudo systemctl restart udevmon
 
 log "Udevmon restarted. Script finished."
