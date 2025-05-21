@@ -18,8 +18,9 @@ while ! wlr-randr | grep -q '^HDMI-A-[12]'; do
     sleep 10
 done
 
-log "Display detected on HDMI-A-1 or HDMI-A-2. Restarting udevmon to trigger HideAway."
+log "Display detected on HDMI-A-1 or HDMI-A-2. Restarting udevmon to trigger HideAway after 30 seconds."
 
+sleep 30
 sudo systemctl restart udevmon
 
 log "Udevmon restarted. Script finished."
