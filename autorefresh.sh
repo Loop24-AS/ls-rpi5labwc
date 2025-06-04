@@ -1,8 +1,10 @@
 #!/bin/bash
 
 LOG_FILE="/home/loopsign/autorefresh.log"
-CHECK_INTERVAL=10  # Check for reconnection every 10 seconds
+CHECK_INTERVAL=10  # Check every 10 seconds
+DISCONNECT_NOTIFY_DELAY=60  # 1 minute
 LAST_CONNECTED=true
+ZENITY_PID=""
 
 # --- Logging ---
 log() {
@@ -31,6 +33,21 @@ is_connected() {
     ping -q -c1 -W1 8.8.8.8 &>/dev/null
 }
 
+# --- Zenity warning ---
+show_disconnected_warning() {
+    zenity --warning --text="Internet connection lost" --title="LoopSign" --timeout=0 &
+    ZENITY_PID=$!
+    log "Zenity warning shown. PID=$ZENITY_PID"
+}
+
+kill_zenity() {
+    if [[ -n "$ZENITY_PID" ]] && kill -0 "$ZENITY_PID" 2>/dev/null; then
+        kill "$ZENITY_PID"
+        log "Zenity warning killed. PID=$ZENITY_PID"
+        ZENITY_PID=""
+    fi
+}
+
 # --- 3-hour refresh loop ---
 three_hour_loop() {
     while true; do
@@ -47,15 +64,25 @@ three_hour_loop() {
 
 # --- Internet reconnection watchdog loop ---
 watchdog_loop() {
+    local disconnected_for=0
     while true; do
         if is_connected; then
             if [[ "$LAST_CONNECTED" = false ]]; then
                 log "Internet reconnected — refreshing Chromium."
+                kill_zenity
                 refresh_chromium
             fi
             LAST_CONNECTED=true
+            disconnected_for=0
         else
+            if [[ "$LAST_CONNECTED" = true ]]; then
+                log "Internet connection lost."
+            fi
             LAST_CONNECTED=false
+            ((disconnected_for+=CHECK_INTERVAL))
+            if [[ "$disconnected_for" -ge "$DISCONNECT_NOTIFY_DELAY" ]] && [[ -z "$ZENITY_PID" ]]; then
+                show_disconnected_warning
+            fi
         fi
         sleep "$CHECK_INTERVAL"
     done
