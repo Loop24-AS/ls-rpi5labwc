@@ -34,8 +34,16 @@ ACTUAL_DISPLAY_NAME=$(echo "$DISPLAY_LINE" | sed -E 's/ \([^()]+\)$//')
 # Get physical size (e.g. 600x340)
 PHYSICAL_SIZE=$(echo "$WLR_OUTPUT" | grep -A1 "$ACTUAL_DISPLAY_NAME" | awk -F'[:)]' '/Physical size/ {gsub(" mm", "", $2); print $2; exit}' | xargs)
 
-# Extract resolution and refresh rate from preferred, current mode
-read ACTIVE_RES ACTIVE_HZ <<< $(echo "$WLR_OUTPUT" | grep '(preferred, current)' | awk '{print $1, $3}' | sed 's/[^0-9x. ]//g')
+# Try to extract resolution/refresh rate from (preferred, current) first
+RES_LINE=$(echo "$WLR_OUTPUT" | grep '(preferred, current)' | head -n1)
+
+# If not found, fall back to just (current)
+if [ -z "$RES_LINE" ]; then
+  RES_LINE=$(echo "$WLR_OUTPUT" | grep '(current)' | head -n1)
+fi
+
+# Extract resolution and refresh rate from the chosen line
+read ACTIVE_RES ACTIVE_HZ <<< $(echo "$RES_LINE" | awk '{print $1, $3}' | sed 's/[^0-9x. ]//g')
 
 # Fallbacks
 ACTUAL_DISPLAY_NAME=${ACTUAL_DISPLAY_NAME:-UnknownDisplay}
