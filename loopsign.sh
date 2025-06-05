@@ -45,6 +45,9 @@ fi
 # Extract resolution and refresh rate from the chosen line
 read ACTIVE_RES ACTIVE_HZ <<< $(echo "$RES_LINE" | awk '{print $1, $3}' | sed 's/[^0-9x. ]//g')
 
+# Truncate refresh rate to integer
+ACTIVE_HZ=$(printf "%.0f" "$ACTIVE_HZ")
+
 # Fallbacks
 ACTUAL_DISPLAY_NAME=${ACTUAL_DISPLAY_NAME:-UnknownDisplay}
 PHYSICAL_SIZE=${PHYSICAL_SIZE:-0x0}
