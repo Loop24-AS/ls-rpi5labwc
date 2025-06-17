@@ -3,6 +3,9 @@
 exec > /tmp/autorun.log 2>&1
 echo "Script started at $(date)"
 
+echo "Set resolution to Full HD"
+wlr-randr --output HDMI-A-1 --mode 1920x1080@60Hz
+
 # Restart udevmon to hide cursor
 sudo systemctl restart udevmon
 
