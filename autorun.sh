@@ -3,8 +3,8 @@
 exec > /tmp/autorun.log 2>&1
 echo "Script started at $(date)"
 
-echo "Set resolution to Full HD"
-wlr-randr --output HDMI-A-1 --mode 1920x1080@60Hz
+# echo "Set resolution to Full HD"
+# wlr-randr --output HDMI-A-1 --mode 1920x1080@60Hz
 
 # Restart udevmon to hide cursor
 sudo systemctl restart udevmon
@@ -157,7 +157,7 @@ start_countdown
 # Run the updated scripts
 cd /home/loopsign/ls-rpi5labwc
 chmod +x autorefresh.sh loopsign.sh hidecursor.sh loopsignsplash.sh pishrink.sh hideaway-trigger.sh configure-kanshi.sh # Adjust filenames as needed
-# ./configure-kanshi.sh &
+./configure-kanshi.sh
 nohup ./autorefresh.sh &
 ./loopsign.sh &
 ./hideaway-trigger.sh &
