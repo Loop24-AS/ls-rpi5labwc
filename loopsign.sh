@@ -76,7 +76,6 @@ HASH=$(cat /home/loopsign/Desktop/.hash.txt)
 # --- Launch Chromium in Kiosk Mode ---
 log "Launching Chromium..."
 chromium-browser \
-  --disable-gpu \
   --disable-media-stream \
   --kiosk \
   --disable-desktop-notifications \
