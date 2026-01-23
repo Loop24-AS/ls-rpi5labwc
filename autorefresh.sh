@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LOG_FILE="/home/loopsign/autorefresh.log"
-CHECK_INTERVAL=10  # Check every 10 seconds
+CHECK_INTERVAL=20  # Check every 10 seconds
 DISCONNECT_NOTIFY_DELAY=60  # 1 minute
 LAST_CONNECTED=true
 ZENITY_PID=""
