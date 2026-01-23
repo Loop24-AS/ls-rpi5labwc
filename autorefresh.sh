@@ -30,7 +30,7 @@ refresh_chromium() {
 
 # --- Internet Check ---
 is_connected() {
-    ping -q -c1 -W1 8.8.8.8 &>/dev/null
+    curl -sf --max-time 3 https://www.google.com > /dev/null
 }
 
 # --- Zenity warning ---
