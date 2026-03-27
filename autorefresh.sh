@@ -1,8 +1,9 @@
 #!/bin/bash
 
 LOG_FILE="/home/loopsign/autorefresh.log"
-CHECK_INTERVAL=20  # Check every 10 seconds
-DISCONNECT_NOTIFY_DELAY=60  # 1 minute
+CHECK_INTERVAL_NORMAL=60
+CHECK_INTERVAL_FAST=3
+DISCONNECT_NOTIFY_DELAY=60
 LAST_CONNECTED=true
 ZENITY_PID=""
 
@@ -30,7 +31,7 @@ refresh_chromium() {
 
 # --- Internet Check ---
 is_connected() {
-    curl -sf --max-time 3 https://www.google.com > /dev/null
+    curl -4 -sfI --connect-timeout 2 --max-time 6 https://play.loopsign.eu/ >/dev/null 2>&1
 }
 
 # --- Zenity warning ---
@@ -64,27 +65,46 @@ three_hour_loop() {
 
 # --- Internet reconnection watchdog loop ---
 watchdog_loop() {
-    local disconnected_for=0
+    local disconnect_start=0
+    local in_grace_period=false
+
     while true; do
         if is_connected; then
-            if [[ "$LAST_CONNECTED" = false ]]; then
+            if [[ -n "$ZENITY_PID" ]]; then
                 log "Internet reconnected — refreshing Chromium."
                 kill_zenity
                 refresh_chromium
+            elif [[ "$in_grace_period" = true ]]; then
+                log "Internet restored before warning threshold."
             fi
+
             LAST_CONNECTED=true
-            disconnected_for=0
+            in_grace_period=false
+            disconnect_start=0
+
+            sleep "$CHECK_INTERVAL_NORMAL"
         else
-            if [[ "$LAST_CONNECTED" = true ]]; then
-                log "Internet connection lost."
+            if [[ "$LAST_CONNECTED" = true ]] && [[ "$in_grace_period" = false ]]; then
+                log "Internet check failed. Entering grace period."
+                LAST_CONNECTED=false
+                in_grace_period=true
+                disconnect_start=$(date +%s)
             fi
-            LAST_CONNECTED=false
-            ((disconnected_for+=CHECK_INTERVAL))
-            if [[ "$disconnected_for" -ge "$DISCONNECT_NOTIFY_DELAY" ]] && [[ -z "$ZENITY_PID" ]]; then
-                show_disconnected_warning
+
+            if [[ "$in_grace_period" = true ]]; then
+                local now
+                now=$(date +%s)
+                local offline_for=$((now - disconnect_start))
+
+                if [[ "$offline_for" -ge "$DISCONNECT_NOTIFY_DELAY" ]] && [[ -z "$ZENITY_PID" ]]; then
+                    log "Internet has been down for ${offline_for} seconds. Showing warning."
+                    show_disconnected_warning
+                    in_grace_period=false
+                fi
             fi
+
+            sleep "$CHECK_INTERVAL_FAST"
         fi
-        sleep "$CHECK_INTERVAL"
     done
 }
 
