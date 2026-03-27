@@ -49,7 +49,7 @@ kill_zenity() {
     fi
 }
 
-# --- 3-hour refresh loop ---
+# --- 12-hour refresh loop ---
 three_hour_loop() {
     while true; do
         if check_chromium; then
@@ -59,7 +59,7 @@ three_hour_loop() {
             log "Chromium is not running."
         fi
         log "Waiting 3 hours before next refresh."
-        sleep 10800
+        sleep 43200
     done
 }
 
