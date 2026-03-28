@@ -58,7 +58,7 @@ twelve_hour_loop() {
         else
             log "Chromium is not running."
         fi
-        log "Waiting 3 hours before next refresh."
+        log "Waiting 12 hours before next refresh."
         sleep 43200
     done
 }
