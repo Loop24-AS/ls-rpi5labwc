@@ -49,8 +49,8 @@ kill_zenity() {
     fi
 }
 
-# --- 12-hour refresh loop ---
-twelve_hour_loop() {
+# --- 6-hour refresh loop ---
+six_hour_loop() {
     while true; do
         if check_chromium; then
             log "Chromium is running. Performing scheduled refresh..."
@@ -58,8 +58,8 @@ twelve_hour_loop() {
         else
             log "Chromium is not running."
         fi
-        log "Waiting 12 hours before next refresh."
-        sleep 43200
+        log "Waiting 6 hours before next refresh."
+        sleep 21600
     done
 }
 
@@ -109,5 +109,5 @@ watchdog_loop() {
 }
 
 # --- Run both loops in parallel ---
-twelve_hour_loop &
+six_hour_loop &
 watchdog_loop
