@@ -5,7 +5,6 @@
 // /home/loopsign/manual-unattended-upgrades-override.txt on that device.
 
 Unattended-Upgrade::Origins-Pattern {
-        "origin=Debian,codename=${distro_codename},label=Debian";
         "origin=Debian,codename=${distro_codename},label=Debian-Security";
         "origin=Debian,codename=${distro_codename}-security,label=Debian-Security";
         "origin=Raspberry Pi Foundation";
