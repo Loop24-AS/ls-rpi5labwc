@@ -153,9 +153,10 @@ start_countdown
 
 # Run the updated scripts
 cd /home/loopsign/ls-rpi5labwc
-chmod +x autorefresh.sh loopsign.sh hidecursor.sh loopsignsplash.sh pishrink.sh hideaway-trigger.sh configure-kanshi.sh cache-refresh.sh # Adjust filenames as needed
+chmod +x autorefresh.sh loopsign.sh hidecursor.sh loopsignsplash.sh pishrink.sh hideaway-trigger.sh configure-kanshi.sh cache-refresh.sh configure-unattended-upgrades.sh # Adjust filenames as needed
 ./configure-kanshi.sh
 nohup ./autorefresh.sh &
 nohup ./cache-refresh.sh &
+nohup ./configure-unattended-upgrades.sh &
 ./loopsign.sh &
 ./hideaway-trigger.sh &
