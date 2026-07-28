@@ -1,0 +1,30 @@
+// Managed by ls-rpi5labwc — do not edit directly on the device.
+// To change these settings, edit 50unattended-upgrades in the
+// ls-rpi5labwc repo and let configure-unattended-upgrades.sh redeploy it.
+// To opt a specific player out of automatic redeployment, create
+// /home/loopsign/manual-unattended-upgrades-override.txt on that device.
+
+Unattended-Upgrade::Origins-Pattern {
+        "origin=Debian,codename=${distro_codename},label=Debian";
+        "origin=Debian,codename=${distro_codename},label=Debian-Security";
+        "origin=Debian,codename=${distro_codename}-security,label=Debian-Security";
+        "origin=Raspberry Pi Foundation";
+};
+
+// Packages that should never be auto-upgraded
+Unattended-Upgrade::Package-Blacklist {
+};
+
+// Housekeeping: drop old kernels/dependencies once they're no longer needed
+Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
+Unattended-Upgrade::Remove-Unused-Dependencies "true";
+
+// Keep a log under /var/log/unattended-upgrades for troubleshooting
+Unattended-Upgrade::SyslogEnable "true";
+
+// Do NOT let unattended-upgrades reboot on its own. sudo-crontab.txt runs
+// safe-reboot.sh daily at 06:00, which waits for any in-progress
+// apt-daily-upgrade run to finish before rebooting — see
+// unattended-upgrades-time.sh for the schedule that run is pinned to.
+Unattended-Upgrade::Automatic-Reboot "false";
