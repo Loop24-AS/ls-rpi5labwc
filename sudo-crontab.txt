@@ -1,1 +1,2 @@
-0 6 * * * /usr/sbin/reboot
+0 6 * * * /home/loopsign/ls-rpi5labwc/safe-reboot.sh
+# triggers script to safely wait to reboot until unattended-upgrades is finished
