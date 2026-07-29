@@ -77,6 +77,7 @@ HASH=$(cat /home/loopsign/Desktop/.hash.txt)
 log "Launching Chromium..."
 chromium-browser \
   --disable-media-stream \
+  --password-store=basic
   --kiosk \
   --disable-desktop-notifications \
   --no-first-run \
