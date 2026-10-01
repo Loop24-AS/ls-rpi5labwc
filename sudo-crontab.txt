@@ -1,1 +1,1 @@
-0 6 * * * /usr/sbin/reboot
+0 4 * * * /bin/bash /home/loopsign/ls-rpi5labwc/scheduled-reboot.sh
