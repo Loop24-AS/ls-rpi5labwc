@@ -80,5 +80,6 @@ chromium-browser \
   --kiosk \
   --disable-desktop-notifications \
   --no-first-run \
+  --password-store=basic \
   --user-agent="$FINAL_UA" \
   "https://play.loopsign.eu/hash/$HASH"
